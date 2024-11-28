@@ -9,5 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './course-register.component.css',
 })
 export class CourseRegisterComponent {
-  @Input() courseId!: any;
+  @Input() courseId!: string;
 }
