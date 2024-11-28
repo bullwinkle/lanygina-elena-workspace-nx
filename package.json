@@ -2,7 +2,15 @@
   "name": "@lanygina-elena-workspace-nx/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "nx:reset": "nx reset",
+    "build:fe": "nx run lanygina-elena-web:prerender:production --verbose",
+    "start:fe": "http-server dist/apps/lanygina-elena-web/browser --cors",
+    "build:api": "nx run lanygina-elena-api:build:production --verbose",
+    "start:api": "node dist/apps/lanygina-elena-api/main.js",
+    "build:telegram-bot": "nx run lanygina-elena-telegram-bot:build:production --verbose",
+    "start:telegram-bot": "node dist/apps/lanygina-elena-telegram-bot/main.js"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~18.2.0",
@@ -20,6 +28,7 @@
     "@nestjs/platform-express": "^10.0.2",
     "axios": "^1.6.0",
     "express": "^4.21.1",
+    "http-server": "^14.1.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.8.0",
     "zone.js": "~0.14.3"
