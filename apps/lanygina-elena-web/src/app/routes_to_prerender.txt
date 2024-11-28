@@ -1,0 +1,14 @@
+/
+/about
+/contacts
+/courses
+
+/courses/course_1
+/courses/course_1/register
+
+/courses/course_2
+/courses/course_2/register
+
+/courses/course_3
+/courses/course_3/register
+

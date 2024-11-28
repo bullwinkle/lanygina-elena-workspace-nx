@@ -82,7 +82,8 @@
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "lanygina-elena-web:build",
+        "staticFilePath": "dist/apps/lanygina-elena-web/browser",
+        "buildTarget": "lanygina-elena-web:prerender",
         "port": 4200,
         "spa": true
       }
@@ -126,7 +127,7 @@
     "prerender": {
       "executor": "@angular-devkit/build-angular:prerender",
       "options": {
-        "routes": ["/"]
+        "routesFile": "apps/lanygina-elena-web/src/app/routes_to_prerender.txt"
       },
       "configurations": {
         "development": {
