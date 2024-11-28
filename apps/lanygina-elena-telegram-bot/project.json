@@ -1,0 +1,65 @@
+{
+  "name": "lanygina-elena-telegram-bot",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/lanygina-elena-telegram-bot/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/lanygina-elena-telegram-bot",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/lanygina-elena-telegram-bot/src/main.ts",
+        "tsConfig": "apps/lanygina-elena-telegram-bot/tsconfig.app.json",
+        "assets": ["apps/lanygina-elena-telegram-bot/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "lanygina-elena-telegram-bot:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "lanygina-elena-telegram-bot:build:development"
+        },
+        "production": {
+          "buildTarget": "lanygina-elena-telegram-bot:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/lanygina-elena-telegram-bot/jest.config.ts"
+      }
+    }
+  }
+}
