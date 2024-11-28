@@ -11,9 +11,8 @@ import {CourseDetailsComponent} from './components/courses/details/course-detail
 import {CourseComponent} from './components/courses/course/course.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 
-const resolverCourceId = async (route: ActivatedRouteSnapshot) => (route.parent?.params as {
-  courseId: string
-})?.courseId ?? 'unknown';
+const resolverCourseId =
+  async (route?: ActivatedRouteSnapshot) => (route?.parent?.params as {courseId: string})?.courseId ?? 'unknown';
 
 export const appRoutes: Route[] = [
   {path: '', component: PsihologLandingComponent, pathMatch: 'full'},
@@ -28,7 +27,7 @@ export const appRoutes: Route[] = [
           {
             path: '',
             resolve: {
-              courseId: resolverCourceId,
+              courseId: resolverCourseId,
             },
             component: CourseDetailsComponent,
             pathMatch: 'full'
@@ -36,7 +35,7 @@ export const appRoutes: Route[] = [
           {
             path: 'register',
             resolve: {
-              courseId: resolverCourceId,
+              courseId: resolverCourseId,
             },
             component: CourseRegisterComponent
           },

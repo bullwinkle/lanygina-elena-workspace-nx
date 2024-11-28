@@ -1,11 +1,11 @@
 import {Component, Input} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import {RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-course',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink],
+  imports: [CommonModule, RouterModule],
   templateUrl: './course.component.html',
   styleUrl: './course.component.css',
 })
