@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 app.get('/api', async (req, res) => {
   try {
-    const response = await fetch(`${BACKEND_URL}`);
+    const response = await fetch(`${BACKEND_URL}/db`);
     const data = await response.json();
     res.send(data);
   } catch (error) {
