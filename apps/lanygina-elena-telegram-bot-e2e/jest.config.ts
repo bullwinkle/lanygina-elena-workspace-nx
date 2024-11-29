@@ -1,9 +1,7 @@
 export default {
-  displayName: 'lanygina-elena-telegram-bot-e2e',
+  displayName: 'langygina-elena-telegram-bot-e2e',
   preset: '../../jest.preset.js',
-  globalSetup: '<rootDir>/src/support/global-setup.ts',
-  globalTeardown: '<rootDir>/src/support/global-teardown.ts',
-  setupFiles: ['<rootDir>/src/support/test-setup.ts'],
+  setupFiles: ['<rootDir>/src/test-setup.ts'],
   testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': [
@@ -14,5 +12,5 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/lanygina-elena-telegram-bot-e2e',
+  coverageDirectory: '../../coverage/langygina-elena-telegram-bot-e2e',
 };

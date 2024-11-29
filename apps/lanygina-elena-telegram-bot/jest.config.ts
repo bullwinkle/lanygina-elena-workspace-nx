@@ -1,5 +1,5 @@
 export default {
-  displayName: 'lanygina-elena-telegram-bot',
+  displayName: 'langygina-elena-telegram-bot',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

@@ -1,34 +1,72 @@
-import express from 'express';
+// import {Context, Markup, Telegraf, Telegram} from 'telegraf';
+import {Markup, Telegraf, Telegram} from 'telegraf';
+// import {Update} from 'typegram';
+// import {InputMediaPhoto} from 'telegraf/types';
 
-const PORT = Number(process.env.PORT) || 3009;
-const HOST = process.env.HOST || 'localhost';
-const BACKEND_HOST = process.env?.['LE_BACKEND_URL'] || 'http://localhost:3010';
-export const BACKEND_URL = `${BACKEND_HOST}/api`;
+// import {Configuration as OpenAIConfiguration, OpenAIApi} from 'openai';
 
-const FRONTEND_URL = process.env?.['LE_FRONTEND_URL'] || 'http://localhost:4200';
-const DATABASE_URL = process.env?.['LE_DATABASE_URL'] || 'postgresql://lanyginaelena_db_user:VGCcilLsXvWip2z2Vxp4jadxPwbqYGie@dpg-ct4bfsl6l47c73f8co6g-a.frankfurt-postgres.render.com/lanyginaelena_db';
+// const CHAT_ID = process.env.CHAT_ID as string;
+// const CHANNEL_ID = process.env.CHANNEL_ID as string;
+// const BOT_TOKEN = process.env.BOT_TOKEN as string;
+const BOT_TOKEN = '7554641816:AAFl5XefPcfeaeqDyNugM13J912-BUCDTcI';
 
-console.log(`PORT:`, PORT);
-console.log(`HOST:`, HOST);
-console.log(`FRONTEND_URL:`, FRONTEND_URL);
-console.log(`DATABASE_URL:`, DATABASE_URL);
+// const telegram: Telegram = new Telegram(BOT_TOKEN);
 
-const app = express();
+const bot = new Telegraf(BOT_TOKEN);
 
-app.get('/', (req, res) => {
-  res.send({message: `Hello from Telegram bot!`});
+
+// const OPEN_AI_API_KEY = process.env.OPENAI_TOKEN as string;
+
+// const openAIConfiguration = new OpenAIConfiguration({
+//     apiKey: OPEN_AI_API_KEY,
+// });
+// const openai = new OpenAIApi(openAIConfiguration);
+
+
+bot.start((ctx) => {
+    ctx.reply('Hello ' + ctx.from.first_name + '!');
 });
 
-app.get('/api', async (req, res) => {
-  try {
-    const response = await fetch(`${BACKEND_URL}/db`);
-    const data = await response.json();
-    res.send(data);
-  } catch (error) {
-    res.send({error: error.message});
-  }
+bot.help((ctx) => {
+    ctx.reply('Send /start to receive a greeting');
+    ctx.reply('Send /keyboard to receive a message with a keyboard');
+    ctx.reply('Send /quit to stop the bot');
 });
 
-app.listen(PORT, HOST, () => {
-  console.log(`[ ready ] http://${HOST}:${PORT}`);
+bot.command('quit', (ctx) => {
+    // Explicit usage
+    ctx.telegram.leaveChat(ctx.message.chat.id);
+
+    // Context shortcut
+    ctx.leaveChat();
 });
+
+bot.command('keyboard', (ctx) => {
+    ctx.reply(
+        'Keyboard',
+        Markup.inlineKeyboard([
+            Markup.button.callback('First option', 'first'),
+            Markup.button.callback('Second option', 'second'),
+            Markup.button.callback('Third option', 'third'),
+        ])
+    );
+});
+
+bot.command('getchatid', (ctx) => {
+    const chatId = ctx.message.chat.id;
+    ctx.reply(`The ID of this chat is ${chatId}`);
+});
+
+
+bot.on('text', async (ctx) => {
+    console.log(ctx);
+    console.log(ctx.chat);
+
+    ctx.reply('You said: ' + ctx.message.text);
+});
+
+bot.launch();
+
+// Enable graceful stop
+process.once('SIGINT', () => bot.stop('SIGINT'));
+process.once('SIGTERM', () => bot.stop('SIGTERM'));
