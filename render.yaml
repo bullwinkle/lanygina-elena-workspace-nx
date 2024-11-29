@@ -1,4 +1,4 @@
-# Exported from Render on 2024-11-29T01:14:53Z
+# Exported from Render on 2024-11-29T03:34:01Z
 databases:
   - name: lanygina-elena-db-postgres-instance
     databaseName: lanyginaelena_db
@@ -11,42 +11,41 @@ databases:
     postgresMajorVersion: "16"
 services:
   - type: web
+    name: lanygina-elena-web
+    runtime: static
+    repo: https://github.com/bullwinkle/lanygina-elena-workspace-nx
+    envVars:
+      - key: PORT
+        sync: false
+      - fromGroup: lanygina-elena-workspace-infrastructure
+    buildCommand: npm install && npm run build:fe
+    staticPublishPath: dist/apps/lanygina-elena-web/browser
+    autoDeploy: false
+  - type: web
     name: lanygina-elena-telegram-bot
     runtime: node
     repo: https://github.com/bullwinkle/lanygina-elena-workspace-nx
     plan: free
     envVars:
-      - key: HOST
-        sync: false
       - key: PORT
         sync: false
+      - fromGroup: lanygina-elena-workspace-infrastructure
     region: frankfurt
     buildCommand: npm install && npm run build:telegram-bot
     startCommand: npm run start:telegram-bot
+    autoDeploy: false
   - type: web
     name: lanygina-elena-api
     runtime: node
     repo: https://github.com/bullwinkle/lanygina-elena-workspace-nx
     plan: free
     envVars:
-      - key: HOST
-        sync: false
       - key: PORT
         sync: false
+      - fromGroup: lanygina-elena-workspace-infrastructure
     region: frankfurt
     buildCommand: npm install && npm run build:api
     startCommand: npm run start:api
-  - type: web
-    name: lanygina-elena-web
-    runtime: static
-    repo: https://github.com/bullwinkle/lanygina-elena-workspace-nx
-    envVars:
-      - key: HOST
-        sync: false
-      - key: PORT
-        sync: false
-    buildCommand: npm install && npm run build:fe
-    staticPublishPath: dist/apps/lanygina-elena-web/browser
     autoDeploy: false
   - type: redis
     name: lanygina-elena-db-redis-cache-instance
