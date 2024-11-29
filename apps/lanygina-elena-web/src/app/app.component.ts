@@ -18,9 +18,7 @@ console.log('BACKEND_URL:', BACKEND_URL);
 })
 export class AppComponent {
   title = 'lanygina-elena-web';
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  response$: any = this.httpClient.get(BACKEND_URL)
+  response$: any = this['httpClient'].get(BACKEND_URL)
     .pipe(shareReplay(), catchError(() => of(null)));
 
   constructor(private httpClient: HttpClient) {
