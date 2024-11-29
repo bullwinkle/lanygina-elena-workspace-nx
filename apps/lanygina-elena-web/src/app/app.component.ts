@@ -18,9 +18,10 @@ console.log('BACKEND_URL:', BACKEND_URL);
 })
 export class AppComponent {
   title = 'lanygina-elena-web';
-  response$: any = this['httpClient'].get(BACKEND_URL)
-    .pipe(shareReplay(), catchError(() => of(null)));
+  response$: any;
 
   constructor(private httpClient: HttpClient) {
+    this.response$ = this.httpClient.get(BACKEND_URL)
+      .pipe(shareReplay(), catchError(() => of(null)));
   }
 }
