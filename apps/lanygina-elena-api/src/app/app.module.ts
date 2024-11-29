@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {ConfigModule} from '@nestjs/config';
-import {TypeOrmModule} from '@nestjs/typeorm';
-import {TypeOrmConfigService} from './typeorm.service';
+// import {TypeOrmModule} from '@nestjs/typeorm';
+// import {TypeOrmConfigService} from './typeorm.service';
 
 @Module({
   imports: [
@@ -21,7 +21,7 @@ import {TypeOrmConfigService} from './typeorm.service';
       cache: true,
       // validate: envValidation,
     }),
-    TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService })
+    // TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService })
   ],
   controllers: [AppController],
   providers: [AppService],
