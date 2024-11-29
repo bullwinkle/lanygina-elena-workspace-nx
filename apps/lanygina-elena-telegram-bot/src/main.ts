@@ -16,7 +16,17 @@ console.log(`DATABASE_URL:`, DATABASE_URL);
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send({ message: `Hello from Telegram bot!` });
+  res.send({message: `Hello from Telegram bot!`});
+});
+
+app.get('/api', async (req, res) => {
+  try {
+    const response = await fetch(`${BACKEND_URL}/hello`);
+    const data = await response.json();
+    res.send(data);
+  } catch (error) {
+    res.send({error: error.message});
+  }
 });
 
 app.listen(PORT, HOST, () => {
