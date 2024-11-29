@@ -21,7 +21,7 @@ export class AppComponent {
   response$: any;
 
   constructor(private httpClient: HttpClient) {
-    this.response$ = this.httpClient.get(BACKEND_URL)
+    this.response$ = this.httpClient.get(`${BACKEND_URL}/db`)
       .pipe(shareReplay(), catchError(() => of(null)));
   }
 }
