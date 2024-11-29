@@ -8,7 +8,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-  const PORT = Number(process.env.PORT) || 3000;
+  const PORT = Number(process.env.PORT) || 3010;
   const HOST = process.env.HOST || 'localhost';
   const FRONTEND_URL = process.env?.['LE_FRONTEND_URL'] || 'http://localhost:4200';
   const DATABASE_URL = process.env?.['LE_DATABASE_URL'] || 'postgresql://lanyginaelena_db_user:VGCcilLsXvWip2z2Vxp4jadxPwbqYGie@dpg-ct4bfsl6l47c73f8co6g-a.frankfurt-postgres.render.com/lanyginaelena_db';

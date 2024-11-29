@@ -1,8 +1,8 @@
 import express from 'express';
 
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = Number(process.env.PORT) || 3009;
 const HOST = process.env.HOST || 'localhost';
-const BACKEND_HOST = process.env?.['LE_BACKEND_URL'] || 'http://localhost:4000';
+const BACKEND_HOST = process.env?.['LE_BACKEND_URL'] || 'http://localhost:3010';
 export const BACKEND_URL = `${BACKEND_HOST}/api`;
 
 const FRONTEND_URL = process.env?.['LE_FRONTEND_URL'] || 'http://localhost:4200';
