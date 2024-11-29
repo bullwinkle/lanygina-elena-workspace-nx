@@ -1,5 +1,5 @@
 {
-  "name": "langygina-elena-telegram-bot",
+  "name": "lanygina-elena-telegram-bot",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/lanygina-elena-telegram-bot/src",
   "projectType": "application",
@@ -42,15 +42,15 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "langygina-elena-telegram-bot:build",
+        "buildTarget": "lanygina-elena-telegram-bot:build",
         "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "langygina-elena-telegram-bot:build:development"
+          "buildTarget": "lanygina-elena-telegram-bot:build:development"
         },
         "production": {
-          "buildTarget": "langygina-elena-telegram-bot:build:production"
+          "buildTarget": "lanygina-elena-telegram-bot:build:production"
         }
       }
     },

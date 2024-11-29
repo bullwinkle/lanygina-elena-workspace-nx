@@ -1,5 +1,5 @@
 export default {
-  displayName: 'langygina-elena-telegram-bot-e2e',
+  displayName: 'lanygina-elena-telegram-bot-e2e',
   preset: '../../jest.preset.js',
   setupFiles: ['<rootDir>/src/test-setup.ts'],
   testEnvironment: 'node',
@@ -12,5 +12,5 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/langygina-elena-telegram-bot-e2e',
+  coverageDirectory: '../../coverage/lanygina-elena-telegram-bot-e2e',
 };
