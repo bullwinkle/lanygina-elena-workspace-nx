@@ -1,0 +1,54 @@
+# Exported from Render on 2024-11-29T00:36:58Z
+databases:
+  - name: lanygina-elena-db-postgres-instance
+    databaseName: lanyginaelena_db
+    user: lanyginaelena_db_user
+    plan: free
+    region: frankfurt
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: everywhere
+    postgresMajorVersion: "16"
+services:
+  - type: web
+    name: lanygina-elena-workspace-telegram-bot
+    runtime: node
+    repo: https://github.com/bullwinkle/lanygina-elena-workspace-nx
+    plan: free
+    envVars:
+      - key: HOST
+        sync: false
+      - key: PORT
+        sync: false
+    region: frankfurt
+    buildCommand: npm install && npm run build:telegram-bot
+    startCommand: node dist/apps/lanygina-elena-telegram-bot/main.js
+    autoDeploy: false
+  - type: web
+    name: lanygina-elena-workspace-nx-static
+    runtime: static
+    repo: https://github.com/bullwinkle/lanygina-elena-workspace-nx
+    buildCommand: npm install && npm run build:fe
+    staticPublishPath: dist/apps/lanygina-elena-web/browser
+    autoDeploy: false
+  - type: web
+    name: lanygina-elena-workspace-api
+    runtime: node
+    repo: https://github.com/bullwinkle/lanygina-elena-workspace-nx
+    plan: free
+    envVars:
+      - key: PORT
+        sync: false
+    region: frankfurt
+    buildCommand: npm install && npm run build:api
+    startCommand: node dist/apps/lanygina-elena-api/main.js
+    autoDeploy: false
+  - type: redis
+    name: lanygina-elena-db-redis-cache-instance
+    plan: free
+    region: frankfurt
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: everyone
+version: "1"
